@@ -18,8 +18,20 @@ class ARCANOID_API AArcanoidGameModeBase : public AGameModeBase
 	GENERATED_BODY()
 	
 public:
-	virtual void BeginPlay() override;
+	
 
 	ABrick* ladrillo01;
+
+	//Singleton
+
+	AArcanoidGameModeBase();
+
+protected:
+	virtual void BeginPlay() override;
+private:
+	UPROPERTY()
+		class APaddle* Paddle;
+public:
+	virtual void Tick(float DeltaTime) override;
 
 };

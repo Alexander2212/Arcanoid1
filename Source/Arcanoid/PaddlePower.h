@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Power.h"
 #include "PaddlePower.generated.h"
 
 UCLASS()
@@ -23,4 +24,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	virtual APower* ConcoctPower(FString PowerSKU)
+		PURE_VIRTUAL(APaddlePower::ConcoctPower, return nullptr;);
+	//Order, concoct and returns a Potion of a specific Category
+	APower* OrderPower(FString Category);
 };

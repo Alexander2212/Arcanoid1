@@ -16,6 +16,10 @@ public:
 	APower();
 
 protected:
+	//nombre del poder
+	FString PowerName;
+
+protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
@@ -23,4 +27,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	//construye este poder
+	virtual void construir();
+	//Return the Potion Name
+	FString GetPowerName();
 };

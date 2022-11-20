@@ -4,12 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "Power.h"
-#include "IncreaseArm.generated.h"
+#include "IncreaseSize.generated.h"
+
 /**
  * 
  */
 UCLASS()
-class ARCANOID_API AIncreaseArm : public APower
+class ARCANOID_API AIncreaseSize : public APower
 {
 	GENERATED_BODY()
 protected:
@@ -18,5 +19,4 @@ protected:
 public:
 	//Brew the potion
 	virtual void construir() override;
-	
 };

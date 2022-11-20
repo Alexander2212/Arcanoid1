@@ -25,6 +25,8 @@ public:
 
 	virtual void MoveHorizontal(float _AxisValue);
 
+	UPROPERTY()
+		APaddle* Instance;
 
 protected:
 	// Called when the game starts or when spawned

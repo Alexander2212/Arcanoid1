@@ -24,4 +24,14 @@ void APower::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 }
+void APower::construir()
+{
+	//Log the Boil procedure
+	GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow,TEXT("se construlle"));
 
+}
+FString APower::GetPowerName()
+{
+	//Return the name of this Potion
+	return PowerName;
+}

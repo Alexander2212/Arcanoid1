@@ -13,5 +13,7 @@ UCLASS()
 class ARCANOID_API APaddlePower_Increase : public APaddlePower
 {
 	GENERATED_BODY()
-	
+
+public:
+	virtual APower* ConcoctPower(FString PowerSKU) override;
 };

@@ -4,6 +4,7 @@
 #include "Paddle.h"
 #include "GameFramework/FloatingPawnMovement.h"
 #include "Components/StaticMeshComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 APaddle::APaddle()
@@ -21,6 +22,18 @@ APaddle::APaddle()
 	SM_Paddle->SetCollisionProfileName(TEXT("PhisicActor"));
 
 	FloatingMovement = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("FloatingPawnMovement"));
+
+	//SINGLETON
+	TArray<AActor*> Instances;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(),APaddle::StaticClass(), Instances);
+	if (Instances.Num() > 2)
+	{
+		//If exist at least one of them, set the instance with the first found one
+		Instance = Cast<APaddle>(Instances[0]);
+		GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow,FString::Printf(TEXT("%s already exists"), *Instance->GetName()));
+		//Then Destroy this Actor
+		Destroy();
+	}
 
 }
 
