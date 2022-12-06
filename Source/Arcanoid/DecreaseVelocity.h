@@ -13,5 +13,10 @@ UCLASS()
 class ARCANOID_API ADecreaseVelocity : public APower
 {
 	GENERATED_BODY()
-	
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+public:
+	//Brew the potion
+	virtual void construir() override;
 };

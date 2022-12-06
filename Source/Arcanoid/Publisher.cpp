@@ -25,3 +25,30 @@ void APublisher::Tick(float DeltaTime)
 
 }
 
+void APublisher::Subscribe(AActor* Subscriber)
+{
+	//Add the passed Subscriber
+	Subscribers.Add(Subscriber);
+}
+
+void APublisher::UnSubscribe(AActor* SubscriberToRemove)
+{
+	//Remove the passed Subscriber
+	Subscribers.Remove(SubscriberToRemove);
+}
+
+void APublisher::NotifySubscribers()
+{
+	//Loop for each Subscriber
+	for (AActor* Actor : Subscribers)
+	{
+		//Cast each of them to a concrete Subscriber
+		ISubscriber* Sub = Cast<ISubscriber>(Actor);
+		if (Sub)
+		{
+			//Notify each of them that something has changed, so they can execute their own routine
+			Sub->Update(this);
+		}
+	}
+}
+

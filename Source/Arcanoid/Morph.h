@@ -22,4 +22,5 @@ class ARCANOID_API IMorph
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
+	virtual void Morph() = 0;
 };

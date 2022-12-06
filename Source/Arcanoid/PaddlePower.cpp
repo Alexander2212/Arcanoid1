@@ -29,7 +29,7 @@ APower* APaddlePower::OrderPower(FString Category)
 {
 	//Create the Potion and log its name
 	APower* Power = ConcoctPower(Category);
-	GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow,FString::Printf(TEXT("Concocting %s"), *Power->GetPowerName()));
+	GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow,FString::Printf(TEXT("Creando %s"), *Power->GetPowerName()));
 	//Start the concoct process
 	Power->construir();
 	

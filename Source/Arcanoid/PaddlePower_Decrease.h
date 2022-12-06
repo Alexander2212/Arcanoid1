@@ -14,4 +14,6 @@ class ARCANOID_API APaddlePower_Decrease : public APaddlePower
 {
 	GENERATED_BODY()
 	
+public:
+	virtual APower* ConcoctPower(FString PowerSKU) override;
 };
