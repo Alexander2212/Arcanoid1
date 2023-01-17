@@ -10,6 +10,7 @@
  * 
  */
 class ABall;
+class Abarrera;
 UCLASS()
 class ARCANOID_API APaddlePlayerController : public APlayerController
 {
@@ -27,13 +28,17 @@ protected:
 	//incluido ball
 	void Launch();
 
+	void barrera();
+
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<ABall> BallObj;
 
 	ABall* MyBall;
-	FVector SpawnLocation = FVector(0.0f, 0.0f, 45.0f);
+	FVector SpawnLocation = FVector(20.0f, 0.0f, 45.0f);
 	FRotator SpawnRotator = FRotator(0.0f, 0.0f, 0.0f);
 	FActorSpawnParameters Spawn;
+
+	Abarrera* bar;
 
 public:
 	void SpawnNewBall();

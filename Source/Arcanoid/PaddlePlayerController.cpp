@@ -8,6 +8,8 @@
 
 #include "Paddle.h"
 #include "Ball.h"
+#include "barrera.h"
+
 
 APaddlePlayerController::APaddlePlayerController()
 {
@@ -21,6 +23,8 @@ void APaddlePlayerController::SetupInputComponent()
 
 	InputComponent->BindAxis("MoveHorizontal", this, &APaddlePlayerController::MoveHorizontal);
 	InputComponent->BindAction("Launch", IE_Pressed, this, &APaddlePlayerController::Launch);
+
+	InputComponent->BindAction("barrera", IE_Pressed, this, &APaddlePlayerController::barrera);
 	
 }
 
@@ -48,6 +52,21 @@ void APaddlePlayerController::MoveHorizontal(float _AxisValue)
 	}
 
 
+}
+
+void APaddlePlayerController::barrera()
+{
+	const FVector Ubicacion(20.0f, 50.0f, 100.0f);
+	const FRotator Rotacion(0.0f, 0.0f, 0.0f);
+	//const FVector Escala(3.5f, 0.5f,0.25f);
+
+	UWorld* const World = GetWorld();
+
+	if (World != nullptr) {
+		// Spawn o generacion o creacion de actores en tiempo de ejecucion
+		bar = World->SpawnActor<Abarrera>(Ubicacion, Rotacion);
+		bar->SetHidden(false);	
+	}
 }
 
 void APaddlePlayerController::Launch()
