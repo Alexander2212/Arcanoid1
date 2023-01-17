@@ -27,7 +27,7 @@ void APower::Tick(float DeltaTime)
 void APower::construir()
 {
 	//Log the Boil procedure
-	GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow,TEXT("se construlle"));
+	GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow,TEXT("se construye"));
 
 }
 FString APower::GetPowerName()

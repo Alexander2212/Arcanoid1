@@ -25,15 +25,15 @@ protected:
 	virtual void BeginPlay() override;
 	void MoveHorizontal(float _AxisValue);
 	//incluido ball
-	void Lanch();
+	void Launch();
 
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<ABall> BallObj;
 
 	ABall* MyBall;
-	FVector SpawnLocation = FVector(10.0f, 0.0f, 40.0f);
+	FVector SpawnLocation = FVector(0.0f, 0.0f, 45.0f);
 	FRotator SpawnRotator = FRotator(0.0f, 0.0f, 0.0f);
-	FActorSpawnParameters SpawnInfo;
+	FActorSpawnParameters Spawn;
 
 public:
 	void SpawnNewBall();

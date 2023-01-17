@@ -17,14 +17,17 @@ ABrick::ABrick()
 
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> BrickMessAsset(TEXT("/Game/Meshes/SM_Brick.SM_Brick"));
 
+	BoxCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("Box Collision"));
+	BoxCollision->SetBoxExtent(FVector(25.5f, 12.0f, 12.0f));
+
 	SM_Brick = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Brick"));
 	SM_Brick->SetStaticMesh(BrickMessAsset.Object);
 	SM_Brick->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 
-	BoxCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("Box Collision"));
-	BoxCollision->SetBoxExtent(FVector(25.0f, 10.0f, 10.0f));
+	SM_Brick->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+	BoxCollision->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
-	RootComponent = BoxCollision;
+	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
 
 }
 
@@ -33,7 +36,7 @@ void ABrick::BeginPlay()
 {
 	Super::BeginPlay();
 
-	BoxCollision->OnComponentBeginOverlap.AddDynamic(this, &ABrick::OnOverlapBegin);
+	//BoxCollision->OnComponentBeginOverlap.AddDynamic(this, &ABrick::OnOverlapBegin);
 
 }
 // Called every frame
@@ -43,7 +46,7 @@ void ABrick::Tick(float DeltaTime)
 
 }
 
-void ABrick::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndexType, bool bFromSweet, const FHitResult& SweepResult)
+void ABrick::OnOverlapBegin(AActor* OtherActor)
 {
 	if (OtherActor->ActorHasTag("Ball")) {
 		ABall* MyBall = Cast<ABall>(OtherActor);
@@ -55,9 +58,12 @@ void ABrick::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAc
 
 		FTimerHandle UnusedHandle;
 		GetWorldTimerManager().SetTimer(UnusedHandle, this, &ABrick::DestroyBrick, 0.1f, false);
+
+		FVector GetLocation = this->GetActorLocation();
 	}
 
 }
+
 
 void ABrick::DestroyBrick()
 {

@@ -21,6 +21,9 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UPROPERTY(EditAnywhere)
+		class USceneComponent* Scene;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 		UStaticMeshComponent* SM_Brick;
 
@@ -30,7 +33,10 @@ protected:
 	float SpeedModifierOnBounce = 1.01f;
 
 	UFUNCTION()
-	void OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndexType, bool bFromSweet, const FHitResult& SweepResult);
+	//	virtual void OnOverlapBegin(AActor* OtherActor) override;
+
+
+	void OnOverlapBegin(class AActor* OtherActor);
 
 	void DestroyBrick();
 

@@ -16,7 +16,7 @@ class ARCANOID_API ABall : public AActor
 public:	
 	// Sets default values for this actor's properties
 	ABall();
-	virtual void Lauch();
+	virtual void Launch();
 	bool BallLaunched;
 
 	UFUNCTION()
@@ -28,11 +28,17 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UPROPERTY(EditAnywhere)
+		class USceneComponent* Scene;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 		UStaticMeshComponent* SM_Ball;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 		UProjectileMovementComponent* ProjectileMovement;
+
+	UPROPERTY(VisibleAnyWhere, BlueprintReadOnly)
+		class USphereComponent* SphereCollision;
 
 
 public:	
