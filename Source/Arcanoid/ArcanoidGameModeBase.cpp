@@ -6,11 +6,11 @@
 #include "Paddle.h"
 #include "PaddlePower_Increase.h"
 #include "PaddlePower_Decrease.h"
+#include "PaddleAtack.h"
+#include "Director.h"
+#include "creadorconcreto.h"
 
-#include "ClockTower.h"
-#include "FreakyAllen.h"
-//#include "FreakyJeff.h"
-//#include "FreakySue.h"
+
 
 AArcanoidGameModeBase::AArcanoidGameModeBase()
 {
@@ -26,18 +26,26 @@ void AArcanoidGameModeBase::BeginPlay()
 	//PrimaryActorTick.bCanEverTick = true;
 	//singleton*-
 
-	const FVector Ubicacion(20.0f, 50.0f, 100.0f);
-	const FRotator Rotacion(0.0f, 0.0f, 0.0f);
+	 /*const FVector Ubicacion(-150.0f, 50.0f, 200.0f);
+	 const FRotator Rotacion(0.0f, 0.0f, 0.0f);*/
+	FVector Sl1(-150.0f, 0.0f, 200.0f);
+	FVector SL2(50.0f, 0.0f, 0.0f);
 
-	UWorld* const World = GetWorld();
+	 for (int i = 1; i <= 4; i++) {
+		 Brick = GetWorld()->SpawnActor<ABrick>(ABrick::StaticClass(), Sl1, FRotator::ZeroRotator);
 
-	if (World != nullptr) {
-		// Spawn o generacion o creacion de actores en tiempo de ejecucion
-		ladrillo01 = World->SpawnActor<ABrick>(Ubicacion, Rotacion);
-		ladrillo01->SetHidden(false);
-		GEngine->AddOnScreenDebugMessage(-1, -1, FColor::Cyan, TEXT("Actor ladrillo 01 creado"));
+		 Sl1 = Sl1 + SL2;
+	 }
 
-	}
+	//UWorld* const World = GetWorld();
+
+	//if (World != nullptr) {
+	//	// Spawn o generacion o creacion de actores en tiempo de ejecucion
+	//	ladrillo01 = World->SpawnActor<ABrick>(Ubicacion, Rotacion);
+	//	ladrillo01->SetHidden(false);
+	//	GEngine->AddOnScreenDebugMessage(-1, -1, FColor::Cyan, TEXT("Actor ladrillo 01 creado"));
+
+	//}
 
 	//singleton-*
 	for (int i = 0; i <= 1; i++)
@@ -76,29 +84,22 @@ void AArcanoidGameModeBase::BeginPlay()
 	////Create an Inner Health Potion and log its name
 	Power = PaddlePower_Decrease->OrderPower("Arma_falsa");
 	GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow,FString::Printf(TEXT("la capsula es %s"), *Power->GetPowerName()));
+	//-------------------------------------------------------Builder-------------------------------------------------------------------------------//
 
+	APaddleAtack* PaddleAtack; // producto final
 
-	// observer
+	/* Un director que controla el proceso */
+	IDirector director;
 
-	//Spawn the Clock Tower
-	AClockTower* ClockTower = GetWorld()->SpawnActor<AClockTower>(AClockTower::StaticClass());
-	//Spawn the first Subscriber and set its Clock Tower
-	AFreakyAllen* FreakyAllen = GetWorld()->SpawnActor<AFreakyAllen>(AFreakyAllen::StaticClass());
-	FreakyAllen->SetClockTower(ClockTower);
-	//Spawn the second Subscriber and set its Clock Tower
-	//AFreakyJeff* FreakyJeff = GetWorld()->SpawnActor<AFreakyJeff>
-	//	(AFreakyJeff::StaticClass());
-	//FreakyJeff->SetClockTower(ClockTower);
-	////Spawn the third Subscriber and set its Clock Tower
-	//AFreakySue* FreakySue = GetWorld()->SpawnActor<AFreakySue>
-	//	(AFreakySue::StaticClass());
-	//FreakySue->SetClockTower(ClockTower);
-	//Change the time of the Clock Tower, so the Subscribers can execute their
-	//own routine
-		ClockTower->SetTimeOfDay("Morning");
-		ClockTower->SetTimeOfDay("Midday");
-		ClockTower->SetTimeOfDay("Evening");
+	/* creador concreto */
+	Icreadorconcreto CreadorConcreto;
 
+	/* construir paddle */
+	
+	director.setMyInterface(&CreadorConcreto); // usar lainstancia de MyInterface
+	PaddleAtack = director.getPaddleAtack();
+	PaddleAtack->specifications();
+	//----------------------------------------------------------------------------------------------------------------------------------------------//
 }
 void AArcanoidGameModeBase::Tick(float DeltaTime)
 {

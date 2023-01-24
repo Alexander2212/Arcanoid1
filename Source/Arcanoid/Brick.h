@@ -21,28 +21,27 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditAnywhere)
-		class USceneComponent* Scene;
+
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 		UStaticMeshComponent* SM_Brick;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-		UBoxComponent* BoxCollision;
+		UBoxComponent* Collision;
 
 	float SpeedModifierOnBounce = 1.01f;
 
 	UFUNCTION()
-	//	virtual void OnOverlapBegin(AActor* OtherActor) override;
+			virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
 
 
-	void OnOverlapBegin(class AActor* OtherActor);
+	//void OnOverlapBegin(class AActor* OtherActor);
 
-	void DestroyBrick();
+	
 
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
+	void DestroyBrick();
 };

@@ -11,7 +11,7 @@
 void ABall::Launch()
 {
 	if (!BallLaunched) {
-		SM_Ball->AddImpulse(FVector(140.0f, 0.0f, 130.0f), FName(), true);
+		SM_Ball->AddImpulse(FVector(160.0f, 0.0f, 200.0f), FName(), true);
 		BallLaunched = true;
 	}
 
@@ -26,30 +26,38 @@ UStaticMeshComponent* ABall::GetBall()
 // Sets default values
 ABall::ABall()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	SM_Ball = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Ball"));
-	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
 
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> BallMesh(TEXT("StaticMesh'/Game/Meshes/SM_Ball.SM_Ball'"));
+ 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	SM_Ball = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Ball"));
 	SM_Ball->SetSimulatePhysics(true);
 	SM_Ball->SetEnableGravity(false);
 	SM_Ball->SetConstraintMode(EDOFMode::XZPlane);
+	SM_Ball->SetStaticMesh(BallMesh.Object);
 	SM_Ball->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	SM_Ball->SetCollisionProfileName(TEXT("PhysicsActor"));
+	//RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
 
-	SphereCollision = CreateDefaultSubobject<USphereComponent>(TEXT("Sphere Collision"));
-	SphereCollision->SetConstraintMode(EDOFMode::XZPlane);
+	SetRootComponent(SM_Ball);
+
+	//SphereCollision = CreateDefaultSubobject<USphereComponent>(TEXT("Sphere Collision"));
+	//SphereCollision->SetConstraintMode(EDOFMode::XZPlane);
 
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovement"));
+	ProjectileMovement->InitialSpeed = 0.0f;
+	ProjectileMovement->MaxSpeed = 0.0f;
+	ProjectileMovement->bShouldBounce = true; //Debe rebotar
+	ProjectileMovement->Bounciness = 1.1f; //Rebote
+	ProjectileMovement->Friction = 0.0f; //Friccion
+	//ProjectileMovement->bShouldBounce = true;
+	//ProjectileMovement->Bounciness = 1.1f;
+	//ProjectileMovement->Friction = 0.0f;
+	//ProjectileMovement->Velocity.X = 0.0f;
 
-	ProjectileMovement->bShouldBounce = true;
-	ProjectileMovement->Bounciness = 1.1f;
-	ProjectileMovement->Friction = 0.0f;
-	ProjectileMovement->Velocity.X = 0.0f;
 
-
-	SM_Ball->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
-	SphereCollision->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+	//SM_Ball->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+	//SphereCollision->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 }
 
 // Called when the game starts or when spawned
@@ -64,5 +72,10 @@ void ABall::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void ABall::DestroyBall()
+{
+	Destroy();
 }
 

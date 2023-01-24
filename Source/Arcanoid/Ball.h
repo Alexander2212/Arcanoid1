@@ -28,8 +28,8 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditAnywhere)
-		class USceneComponent* Scene;
+	/*UPROPERTY(EditAnywhere)
+		class USceneComponent* Scene;*/
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 		UStaticMeshComponent* SM_Ball;
@@ -37,12 +37,15 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 		UProjectileMovementComponent* ProjectileMovement;
 
-	UPROPERTY(VisibleAnyWhere, BlueprintReadOnly)
-		class USphereComponent* SphereCollision;
+	//UPROPERTY(VisibleAnyWhere, BlueprintReadOnly)
+	//	class USphereComponent* SphereCollision;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+		class UCapsuleComponent* Collision;
 
+	float SpeedModifierOnBounce = 1.02f; //Modificador de velocidad
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
+	void DestroyBall();
 };

@@ -28,6 +28,11 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
+
+	TArray<ABrick*> LineBricks;
+
+	UPROPERTY()
+		class ABrick* Brick;
 private:
 	UPROPERTY()
 		class APaddle* Paddle;

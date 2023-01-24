@@ -15,19 +15,21 @@ ABrick::ABrick()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> BrickMessAsset(TEXT("/Game/Meshes/SM_Brick.SM_Brick"));
-
-	BoxCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("Box Collision"));
-	BoxCollision->SetBoxExtent(FVector(25.5f, 12.0f, 12.0f));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> BrickMessAsset(TEXT("StaticMesh'/Game/Meshes/SM_Brick.SM_Brick'"));
 
 	SM_Brick = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Brick"));
 	SM_Brick->SetStaticMesh(BrickMessAsset.Object);
 	SM_Brick->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	SetRootComponent(SM_Brick);
 
-	SM_Brick->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
-	BoxCollision->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+	Collision = CreateDefaultSubobject<UBoxComponent>(TEXT("Box Collision"));
+	Collision->SetBoxExtent(FVector(25.5f, 12.0f, 12.0f));
+	Collision->SetupAttachment(GetRootComponent());
 
-	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
+	/*SM_Brick->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+	Collision->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);*/
+	
+	//RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
 
 }
 
@@ -46,7 +48,7 @@ void ABrick::Tick(float DeltaTime)
 
 }
 
-void ABrick::OnOverlapBegin(AActor* OtherActor)
+void ABrick::NotifyActorBeginOverlap(AActor* OtherActor)
 {
 	if (OtherActor->ActorHasTag("Ball")) {
 		ABall* MyBall = Cast<ABall>(OtherActor);
@@ -59,7 +61,7 @@ void ABrick::OnOverlapBegin(AActor* OtherActor)
 		FTimerHandle UnusedHandle;
 		GetWorldTimerManager().SetTimer(UnusedHandle, this, &ABrick::DestroyBrick, 0.1f, false);
 
-		FVector GetLocation = this->GetActorLocation();
+		//FVector GetLocation = this->GetActorLocation();
 	}
 
 }

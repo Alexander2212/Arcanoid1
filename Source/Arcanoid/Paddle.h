@@ -16,7 +16,7 @@ class ARCANOID_API APaddle : public APawn
 public:
 	// Sets default values for this pawn's properties
 	APaddle();
-
+	int vidas;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 		UStaticMeshComponent* SM_Paddle;
 
