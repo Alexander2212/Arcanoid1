@@ -22,7 +22,7 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override; 
 
-	//nombre del obstaculo
+	//nombre del obstaculo (caracteristica que comparten los obstaculos)
 	FString NombreObstaculo;
 	
 
@@ -30,10 +30,11 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	//construye este obstaculo
+	//construye este obstaculo 
 	virtual void construirobs();
 	//devolver el nombre del obstaculo
 	FString GetNombreObstaculo();
+	//movimiento aleatorio
 	UPROPERTY()
 		float MovementRadius;
 };

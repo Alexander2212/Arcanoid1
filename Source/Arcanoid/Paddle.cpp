@@ -16,7 +16,7 @@ APaddle::APaddle()
 	
 	RootComponent = SM_Paddle;
 
-	SM_Paddle->SetEnableGravity(false);
+	SM_Paddle->SetEnableGravity(true);
 	SM_Paddle->SetConstraintMode(EDOFMode::XZPlane);
 	SM_Paddle->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	SM_Paddle->SetCollisionProfileName(TEXT("PhisicActor"));
@@ -40,6 +40,11 @@ APaddle::APaddle()
 void APaddle::MoveHorizontal(float _AxisValue)
 {
 	AddMovementInput(FVector(_AxisValue, 0.0f, 0.0f), 1.0f, false);
+}
+// metodo salto que puede ser redefinido, permite el movimiento en el eje z para esquivar los obstaculos
+void APaddle::Salto(float _AxisValue)
+{
+	AddMovementInput(FVector(0.0f,0.0f,_AxisValue), 1.0f, false);
 }
 
 // Called when the game starts or when spawned

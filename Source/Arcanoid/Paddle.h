@@ -25,6 +25,8 @@ public:
 
 	virtual void MoveHorizontal(float _AxisValue);
 
+	virtual void Salto(float _AxisValue);
+
 	UPROPERTY()
 		APaddle* Instance;
 

@@ -25,18 +25,18 @@ void AObstaculo::BeginPlay()
 void AObstaculo::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	
+	//formula matemaica para realizar el movimiento aleatorio
 	AActor* Parent = GetOwner();
 	if (Parent)
 	{
-		// Find a new position for the object to go to
+		// Encontrar una nueva posición para que el objeto vaya
 		auto NewPos = Parent->GetActorLocation() + FVector
 			(
 				FMath::FRandRange(2.5, -1) * MovementRadius,
 				FMath::FRandRange(4, 0) * MovementRadius,
 				FMath::FRandRange(1, 0) * MovementRadius
 			);
-		// Update the object's position
+		// Actualizar la posición del objeto
 		Parent->SetActorLocation(NewPos);
 	}
 }

@@ -25,6 +25,8 @@ class ARCANOID_API APaddlePlayerController : public APlayerController
 protected:
 	virtual void BeginPlay() override;
 	void MoveHorizontal(float _AxisValue);
+
+	void Salto(float _AxisValue);
 	//incluido ball
 	void Launch();
 

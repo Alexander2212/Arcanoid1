@@ -25,6 +25,8 @@ void APaddlePlayerController::SetupInputComponent()
 	InputComponent->BindAction("Launch", IE_Pressed, this, &APaddlePlayerController::Launch);
 
 	InputComponent->BindAction("barrera", IE_Pressed, this, &APaddlePlayerController::barrera);
+
+	InputComponent->BindAxis("Salto", this, &APaddlePlayerController::Salto);
 	
 }
 
@@ -52,6 +54,15 @@ void APaddlePlayerController::MoveHorizontal(float _AxisValue)
 	}
 
 
+}
+
+void APaddlePlayerController::Salto(float _AxisValue)
+{
+	auto MyPawn = Cast<APaddle>(GetPawn());
+
+	if (MyPawn) {
+		MyPawn->Salto(_AxisValue);
+	}
 }
 
 void APaddlePlayerController::barrera()
