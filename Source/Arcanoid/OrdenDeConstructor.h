@@ -13,5 +13,6 @@ UCLASS()
 class ARCANOID_API AOrdenDeConstructor : public AconstructorObs
 {
 	GENERATED_BODY()
-	
+public:
+	virtual AObstaculo* ConcoctObstaculo(FString obsSKU) override;
 };

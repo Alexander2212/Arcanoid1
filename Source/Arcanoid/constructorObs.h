@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Obstaculo.h"
 #include "constructorObs.generated.h"
 
 UCLASS()
@@ -23,4 +24,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	virtual AObstaculo* ConcoctObstaculo(FString obsSKU)
+		PURE_VIRTUAL(AconstructorObs::ConcoctObstaculo, return nullptr;);
+	//Ordena, elabora y devuelve un poder de una categoría específica
+	AObstaculo* OrdenObstaculo(FString Category);
 };

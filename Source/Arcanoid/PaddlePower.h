@@ -26,6 +26,6 @@ public:
 
 	virtual APower* ConcoctPower(FString PowerSKU)
 		PURE_VIRTUAL(APaddlePower::ConcoctPower, return nullptr;);
-	//Order, concoct and returns a Potion of a specific Category
+	//Ordena, elabora y devuelve un poder de una categoría específica
 	APower* OrderPower(FString Category);
 };

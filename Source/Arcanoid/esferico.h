@@ -13,5 +13,10 @@ UCLASS()
 class ARCANOID_API Aesferico : public AObstaculo
 {
 	GENERATED_BODY()
-	
+protected:
+	// Llamado cuando comienza el juego o cuando se genera
+	virtual void BeginPlay() override;
+public:
+	//Prepara el obstaculo
+	virtual void construirobs() override;
 };

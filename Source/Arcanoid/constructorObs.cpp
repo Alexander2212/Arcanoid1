@@ -24,4 +24,14 @@ void AconstructorObs::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 }
+AObstaculo* AconstructorObs::OrdenObstaculo(FString Category)
+{
+	//Create the Potion and log its name
+	AObstaculo* Obstaculo = ConcoctObstaculo(Category);
+	GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red, FString::Printf(TEXT("Creando %s"), *Obstaculo->GetNombreObstaculo()));
+	//Start the concoct process
+	Obstaculo->construirobs();
+
+	return Obstaculo;
+}
 

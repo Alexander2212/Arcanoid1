@@ -6,9 +6,8 @@
 #include "Paddle.h"
 #include "PaddlePower_Increase.h"
 #include "PaddlePower_Decrease.h"
-#include "PaddleAtack.h"
-#include "Director.h"
-#include "creadorconcreto.h"
+#include "OrdenDeConstructor.h"
+
 
 
 
@@ -84,21 +83,14 @@ void AArcanoidGameModeBase::BeginPlay()
 	////Create an Inner Health Potion and log its name
 	Power = PaddlePower_Decrease->OrderPower("Arma_falsa");
 	GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow,FString::Printf(TEXT("la capsula es %s"), *Power->GetPowerName()));
-	//-------------------------------------------------------Builder-------------------------------------------------------------------------------//
+	//-------------------------------------------------------verano-------------------------------------------------------------------------------//
+	AconstructorObs* OrdenDeConstructor = GetWorld()->SpawnActor<AOrdenDeConstructor>(AOrdenDeConstructor::StaticClass());
 
-	APaddleAtack* PaddleAtack; // producto final
+	AObstaculo* Obstaculo = OrdenDeConstructor->OrdenObstaculo("Cubo");
+	GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red, FString::Printf(TEXT("El obstaculo es %s"), *Obstaculo->GetNombreObstaculo()));
 
-	/* Un director que controla el proceso */
-	IDirector director;
-
-	/* creador concreto */
-	Icreadorconcreto CreadorConcreto;
-
-	/* construir paddle */
-	
-	director.setMyInterface(&CreadorConcreto); // usar lainstancia de MyInterface
-	PaddleAtack = director.getPaddleAtack();
-	PaddleAtack->specifications();
+	Obstaculo = OrdenDeConstructor->OrdenObstaculo("esfera");
+	GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red, FString::Printf(TEXT("El obstaculo es %s"), *Obstaculo->GetNombreObstaculo()));
 	//----------------------------------------------------------------------------------------------------------------------------------------------//
 }
 void AArcanoidGameModeBase::Tick(float DeltaTime)

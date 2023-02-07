@@ -25,3 +25,14 @@ void AObstaculo::Tick(float DeltaTime)
 
 }
 
+void AObstaculo::construirobs()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red, TEXT("se construye"));
+}
+
+FString AObstaculo::GetNombreObstaculo()
+{
+	//Devuelve el nombre de este obstaculo.
+	return NombreObstaculo;
+}
+
