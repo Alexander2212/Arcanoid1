@@ -30,10 +30,16 @@ public:
 	UPROPERTY()
 		APaddle* Instance;
 
+	
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	//UFUNCTION()
+		//virtual void BeginOverlap(AActor* OtherActor) override;
+
+	//float SpeedModifierOnBounce = 1.01f;
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

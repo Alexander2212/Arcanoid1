@@ -5,6 +5,7 @@
 #include "GameFramework/FloatingPawnMovement.h"
 #include "Components/StaticMeshComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "esferico.h"
 
 // Sets default values
 APaddle::APaddle()
@@ -46,6 +47,17 @@ void APaddle::Salto(float _AxisValue)
 {
 	AddMovementInput(FVector(0.0f,0.0f,_AxisValue), 1.0f, false);
 }
+
+//void APaddle::BeginOverlap(AActor* OtherActor)
+//{
+//	if (OtherActor->ActorHasTag("esfera")) {
+//		Aesferico* MyEsfera= Cast<Aesferico>(OtherActor);
+//
+//		FVector EsferaVelocity = MyEsfera->GetVelocity();
+//		EsferaVelocity *= (SpeedModifierOnBounce - 1.0f);
+//
+//	}
+//}
 
 // Called when the game starts or when spawned
 void APaddle::BeginPlay()
