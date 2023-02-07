@@ -11,7 +11,7 @@
  */
 
 class ABrick;
-
+class ACubico;
 UCLASS()
 class ARCANOID_API AArcanoidGameModeBase : public AGameModeBase
 {
@@ -23,6 +23,7 @@ public:
 	ABrick* ladrillo01;
 
 	//Singleton
+
 
 	AArcanoidGameModeBase();
 

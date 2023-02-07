@@ -16,7 +16,12 @@ class ARCANOID_API Aesferico : public AObstaculo
 protected:
 	// Llamado cuando comienza el juego o cuando se genera
 	virtual void BeginPlay() override;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+		UStaticMeshComponent* SM_esfera;
+	
 public:
 	//Prepara el obstaculo
 	virtual void construirobs() override;
+	Aesferico();
 };

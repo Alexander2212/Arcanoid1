@@ -7,6 +7,7 @@
 #include "PaddlePower_Increase.h"
 #include "PaddlePower_Decrease.h"
 #include "OrdenDeConstructor.h"
+#include "Cubico.h"
 
 
 
@@ -35,6 +36,8 @@ void AArcanoidGameModeBase::BeginPlay()
 
 		 Sl1 = Sl1 + SL2;
 	 }
+
+
 
 	//UWorld* const World = GetWorld();
 

@@ -6,6 +6,9 @@
 #include "GameFramework/Actor.h"
 #include "Obstaculo.generated.h"
 
+
+class ACubico;
+class Aesferico;
 UCLASS()
 class ARCANOID_API AObstaculo : public AActor
 {
@@ -21,6 +24,7 @@ protected:
 
 	//nombre del obstaculo
 	FString NombreObstaculo;
+	
 
 public:	
 	// Called every frame
@@ -30,5 +34,6 @@ public:
 	virtual void construirobs();
 	//devolver el nombre del obstaculo
 	FString GetNombreObstaculo();
-
+	UPROPERTY()
+		float MovementRadius;
 };
